@@ -1,4 +1,4 @@
-# 🧾 Dm2buy Snippet App
+# 🧾 Snippets-store
 
 A fullstack MERN-based real-time code snippet manager with collaborative editing, built with **React 19**, **Node.js**, **Express**, **MongoDB**, and **Socket.IO**.
 
@@ -9,7 +9,7 @@ A fullstack MERN-based real-time code snippet manager with collaborative editing
 ### 1. Clone the Repository
 ```bash
 https://github.com/your-username/dm2buy-snippet-app.git
-cd dm2buy-snippet-app
+cd app
 ```
 
 ### 2. Backend Setup (Express + MongoDB)
