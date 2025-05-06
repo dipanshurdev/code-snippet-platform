@@ -1,23 +1,23 @@
-"use client"
-import { Link, useNavigate } from "react-router-dom"
-import { FaCode, FaSignOutAlt, FaUser } from "react-icons/fa"
-import { useAuth } from "../context/AuthContext"
-import "./Navbar.css"
+"use client";
+import { Link, useNavigate } from "react-router-dom";
+import { FaCode, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
+import "./Navbar.css";
 
 const Navbar = () => {
-  const { user, isAuthenticated, logout } = useAuth()
-  const navigate = useNavigate()
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout()
-    navigate("/login")
-  }
+    logout();
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-brand">
         <Link to="/" className="navbar-logo">
-          <FaCode /> CodeSnippet
+          <FaCode /> Snippets-Store
         </Link>
       </div>
 
@@ -29,7 +29,11 @@ const Navbar = () => {
               <span className="user-name">{user?.name}</span>
             </div>
 
-            <button className="logout-button" onClick={handleLogout} title="Logout">
+            <button
+              className="logout-button"
+              onClick={handleLogout}
+              title="Logout"
+            >
               <FaSignOutAlt />
             </button>
           </div>
@@ -45,7 +49,7 @@ const Navbar = () => {
         )}
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

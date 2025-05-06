@@ -18,10 +18,11 @@ api.setAuthToken = (token) => {
   }
 };
 
-// Initialize token from localStorage
-const token = localStorage.getItem("token");
-if (token) {
-  api.setAuthToken(token);
+if (typeof window !== "undefined") {
+  const token = localStorage.getItem("token");
+  if (token) {
+    api.setAuthToken(token);
+  }
 }
 
 export default api;

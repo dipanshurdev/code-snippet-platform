@@ -1,64 +1,64 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { toast } from "react-toastify"
-import { FaCode, FaEnvelope, FaLock } from "react-icons/fa"
-import { useAuth } from "../context/AuthContext"
-import "./Auth.css"
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { FaCode, FaEnvelope, FaLock } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
+import "./Auth.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  })
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { login } = useAuth()
-  const navigate = useNavigate()
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      toast.error("Please fill in all fields")
-      return
+      toast.error("Please fill in all fields");
+      return;
     }
 
     try {
-      setIsSubmitting(true)
-      const result = await login(formData.email, formData.password)
+      setIsSubmitting(true);
+      const result = await login(formData.email, formData.password);
 
       if (result.success) {
-        toast.success("Login successful")
-        navigate("/")
+        toast.success("Login successful");
+        navigate("/");
       } else {
-        toast.error(result.message || "Invalid email or password")
+        toast.error(result.message || "Invalid email or password");
       }
     } catch (error) {
-      console.error("Login error:", error)
-      toast.error("An error occurred during login")
+      console.error("Login error:", error);
+      toast.error("An error occurred during login");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
           <FaCode className="auth-logo" />
-          <h2>Log in to CodeSnippet</h2>
+          <h2>Log in to Snippets-Store</h2>
           <p>Manage and share your code snippets</p>
         </div>
 
         <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="form-group">
+          <div className="form-group flex w-full flex-col">
             <label htmlFor="email">
               <FaEnvelope /> Email
             </label>
@@ -88,7 +88,11 @@ const Login = () => {
             />
           </div>
 
-          <button type="submit" className="btn-primary btn-block" disabled={isSubmitting}>
+          <button
+            type="submit"
+            className="btn-primary btn-block"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Logging in..." : "Log In"}
           </button>
         </form>
@@ -100,7 +104,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

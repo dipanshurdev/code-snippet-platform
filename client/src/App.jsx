@@ -27,6 +27,7 @@ const ProtectedRoute = ({ children }) => {
       </div>
     );
   }
+  // return children;
 
   return isAuthenticated ? children : <Navigate to="/login" />;
 };

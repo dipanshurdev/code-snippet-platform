@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { toast } from "react-toastify"
-import { FaCode, FaUser, FaEnvelope, FaLock } from "react-icons/fa"
-import { useAuth } from "../context/AuthContext"
-import "./Auth.css"
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { FaCode, FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
+import "./Auth.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -13,52 +13,61 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-  })
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { register } = useAuth()
-  const navigate = useNavigate()
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { register } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
-      toast.error("Please fill in all fields")
-      return
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
+      toast.error("Please fill in all fields");
+      return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords do not match")
-      return
+      toast.error("Passwords do not match");
+      return;
     }
 
     if (formData.password.length < 6) {
-      toast.error("Password must be at least 6 characters long")
-      return
+      toast.error("Password must be at least 6 characters long");
+      return;
     }
 
     try {
-      setIsSubmitting(true)
-      const result = await register(formData.name, formData.email, formData.password)
+      setIsSubmitting(true);
+      const result = await register(
+        formData.name,
+        formData.email,
+        formData.password
+      );
 
       if (result.success) {
-        toast.success("Registration successful")
-        navigate("/")
+        toast.success("Registration successful");
+        navigate("/");
       } else {
-        toast.error(result.message || "Registration failed")
+        toast.error(result.message || "Registration failed");
       }
     } catch (error) {
-      console.error("Registration error:", error)
-      toast.error("An error occurred during registration")
+      console.error("Registration error:", error);
+      toast.error("An error occurred during registration");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <div className="auth-container">
@@ -130,7 +139,11 @@ const Register = () => {
             />
           </div>
 
-          <button type="submit" className="btn-primary btn-block" disabled={isSubmitting}>
+          <button
+            type="submit"
+            className="btn-primary btn-block"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Creating Account..." : "Sign Up"}
           </button>
         </form>
@@ -142,7 +155,7 @@ const Register = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
